@@ -279,7 +279,7 @@ static Class imageManagerClass = nil;
         
         [photoView setupPhoto:photo];
         
-        [self deviceOrientationDidChange];
+//        [self deviceOrientationDidChange:nil];
     }];
 }
 
@@ -289,7 +289,7 @@ static Class imageManagerClass = nil;
     
     [[self currentPhotoView] setupPhoto:[self currentPhoto]];
     
-    [self deviceOrientationDidChange];
+//    [self deviceOrientationDidChange:nil];
 }
 
 - (void)browserZoomShow {
@@ -332,7 +332,7 @@ static Class imageManagerClass = nil;
         self.isShow = YES;
         [photoView setupPhoto:photo];
         
-        [self deviceOrientationDidChange];
+//        [self deviceOrientationDidChange:nil];
     }];
 }
 
@@ -888,7 +888,7 @@ static Class imageManagerClass = nil;
     // 20200312 尚未添加observer的情况下才添加，防止多次重复添加
     if(!_isOrientationNotiObserverAdded)
     {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
         _isOrientationNotiObserverAdded = YES;
     }
     
@@ -905,7 +905,7 @@ static Class imageManagerClass = nil;
         [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 }
 
-- (void)deviceOrientationDidChange {
+- (void)deviceOrientationDidChange:(NSNotification *)notification {
     if (self.isScreenRotateDisabled) return;
     
     self.isRotation = YES;
